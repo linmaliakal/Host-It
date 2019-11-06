@@ -20,7 +20,7 @@ const RootStack = createStackNavigator(
         Landing: LandingScreen,
     },
     {
-        initialRouteName: "Home"
+        initialRouteName: "Landing"
     }
 );
 
