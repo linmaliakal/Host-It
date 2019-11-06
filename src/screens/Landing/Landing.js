@@ -5,9 +5,8 @@ import {
   Text,
   View,
   TouchableHighlight } from 'react-native';
-import { whileStatement } from '@babel/types';
 
-export default class Home extends Component {
+export default class Landing extends Component {
   render() {
     return (
       <View style={styles.ViewContainer}>

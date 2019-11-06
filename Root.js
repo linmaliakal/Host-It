@@ -8,12 +8,16 @@ import EventScreen from './src/screens/EventPage.js';
 import GuestScreen from './src/screens/GuestListPage.js';
 import MapScreen from './src/screens/MapPage.js';
 
+import LandingScreen from './src/screens//Landing/Landing.js';
+
 const RootStack = createStackNavigator(
     {
         Home: HomeScreen,
         Event: EventScreen,
         Guest: GuestScreen,
         Map: MapScreen,
+
+        Landing: LandingScreen,
     },
     {
         initialRouteName: "Home"
