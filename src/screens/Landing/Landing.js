@@ -10,7 +10,8 @@ import {
 
 export default class Landing extends Component {
   static navigationOptions = {
-    header: null
+    headerStyle: {backgroundColor: 'red'},
+    title: 'You are not logged in'
   }
 
   render() {
