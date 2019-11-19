@@ -10,7 +10,14 @@ export default class Home extends Component {
   render() {
     return (
       <View style={styles.ViewContainer}>
-        <Text>HomeScreen</Text>
+        <Text>Host-It</Text>
+            <TouchableHighlight onPress={() => this.props.navigation.navigate('Event')}>
+              <View style={styles.ButtonBox}>
+                <View>
+                  <Text style={styles.CustomButton}>Go to Events</Text>
+                </View>
+              </View>
+            </TouchableHighlight>
       </View>
     );
   }
