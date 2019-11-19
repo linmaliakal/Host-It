@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text } from 'react-native';
+import { Button } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator} from 'react-navigation-stack';
 import { createDrawerNavigator} from 'react-navigation-drawer';
@@ -14,6 +14,7 @@ import LandingScreen from './src/screens/Landing/Landing.js';
 import SignupScreen from './src/screens/Landing/SignUp.js';
 import PasswordScreen from './src/screens/Landing/Password.js';
 
+// navigation structure: https://github.com/GantMan/drawer-example/
 const DrawerStack = createDrawerNavigator({
   Home: { screen: HomeScreen },
   Event: { screen: EventScreen },
@@ -24,10 +25,14 @@ const DrawerNavigation = createStackNavigator({
   DrawerStack: { screen: DrawerStack }
 }, {
   headerMode: 'float',
-  navigationOptions: ({navigation}) => ({
+  defaultNavigationOptions: ({navigation}) => ({
     headerStyle: {backgroundColor: 'green'},
-    title: 'Logged In to your app!',
-    headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+    headerTitle: 'Host-It',
+    headerLeft: <Button onPress={() => navigation.toggleDrawer()} title='Debug'/>
   })
 })
 
@@ -38,10 +43,10 @@ const LoginStack = createStackNavigator({
   forgottenPasswordScreen: { screen: PasswordScreen, navigationOptions: { title: 'Forgot Password' } }
 }, {
   headerMode: 'float',
-  navigationOptions: {
+  defaultNavigationOptions: ({ navigation }) => ({
     headerStyle: {backgroundColor: 'red'},
     title: 'You are not logged in'
-  }
+  })
 })
   
 // Manifest of possible screens
@@ -52,7 +57,7 @@ const PrimaryNav = createStackNavigator({
   // Default config for all screens
   headerMode: 'none',
   title: 'Main',
-  initialRouteName: 'loginStack'
+  initialRouteName: 'drawerStack'
 })
   
 const AppContainer = createAppContainer(PrimaryNav);
