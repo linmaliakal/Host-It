@@ -5,6 +5,8 @@ import {
   Button,
   Text,
   View,
+  SafeAreaView,
+  FlatList,
   ScrollView,
   TextInput,
   TouchableHighlight,
@@ -12,57 +14,60 @@ import {
 import { 
   loadSettings,
   saveSettings 
-  } from '../storage/settingsStorage';
+} from '../storage/settingsStorage';
 
 export default class EventPage extends Component {
   
-  handleNameChange(name){
-    this.setState({name});
-  }
+  // handleNameChange(name){
+  //   this.setState({name});
+  // }
   
-  handleSubmit(){
-    saveSettings(this.state);
-  }
+  // handleSubmit(){
+  //   saveSettings(this.state);
+  // }
     
   
-  constructor(props) {
-  super(props);
+  // constructor(props) {
+  //   super(props);
 
-  this.state = { name: '' }
+  //   this.state = { name: '' }
 
-  this.handleNameChange = this.handleNameChange.bind(this);
-  this.handleSubmit = this.handleSubmit.bind(this);
-}
-  async componentDidMount() {
-  const initialState = await loadSettings();
+  //   this.handleNameChange = this.handleNameChange.bind(this);
+  //   this.handleSubmit = this.handleSubmit.bind(this);
+  // }
 
-  this.setState(initialState);
-  } 
+  // async componentDidMount() {
+  //   const initialState = await loadSettings();
+
+  //   this.setState(initialState);
+  // } 
   
   render() {
     return (
-      <View>
-        <Text style={styles.titleStyle}>Event Page Screen</Text>
-        <ScrollView>
-        <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Event Name"
-          maxLength={20}
-          value={this.state.name}
-          onChangeText={this.handleNameChange}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <TouchableOpacity
-            style={styles.saveButton}
-            onPress={this.handleSubmit}
-          >
-            <Text style={styles.saveButtonText}>Save</Text>
-          </TouchableOpacity>
+      <SafeAreaView style={styles.ViewContainer}>
+          <View style={styles.informationBox}>  
+            <View style={styles.titleBox}>
+              <Text style={styles.titleStyle}>Event Page Screen</Text>
+            </View>
+            <View style={styles.whereWhenBox}>
+              <View style={styles.whereWhenItem}>
+                <View style={styles.icon}></View>
+                <Text>Where</Text>
+              </View>
+              <View style={styles.whereWhenItemB}>
+                <View style={styles.icon}></View>
+                <Text>When</Text>  
+              </View>
+              <View style={styles.whereWhenItem}>
+                <View style={styles.icon}></View>
+                <Text>Who</Text>
+              </View>
+            </View>
           </View>
-        </ScrollView>
-      </View>
+          <SafeAreaView style={styles.scrollView}>
+            
+          </SafeAreaView>
+      </SafeAreaView>
     );
   }
 }
@@ -72,8 +77,8 @@ const styles = StyleSheet.create(
     ViewContainer:
     {
       flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
+      // justifyContent: 'center',
+      // alignItems: 'center',
       backgroundColor: '#ffffff',
     },
     container: {
@@ -81,12 +86,6 @@ const styles = StyleSheet.create(
       paddingTop: 45,
       backgroundColor: '#F5FCFF',
     },
-   /* header: {
-      fontSize: 25,
-      textAlign: 'center',
-      margin: 10,
-      fontWeight: 'bold'
-    },*/
     titleStyle: {
       fontSize: 30,
       textAlign: 'center',
@@ -116,5 +115,46 @@ const styles = StyleSheet.create(
       color: '#FFFFFF',
       fontSize: 20,
       textAlign: 'center'
-    }
+    },
+    informationBox: {
+      flex: 1,
+      backgroundColor: '#007BFF',
+    },
+    listBox: {
+      backgroundColor: '#FFFFFF',
+    },
+    titleBox: {
+      flex: 1,
+      flexDirection: 'row', 
+      backgroundColor: '#BB7BFF',
+      justifyContent: 'space-around',
+      alignItems: 'center',
+    },
+    whereWhenBox: {
+      flex: 1,
+      backgroundColor: '#222BFF',
+    },
+    whereWhenItem: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: 'grey',
+    },
+    whereWhenItemB: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: 'lightgrey',
+    },
+    scrollView: {
+      flex: 1,
+      backgroundColor: "#1a1a1a"
+    },
+    icon: {
+      height: 40,
+      width: 40,
+      borderRadius: 20,
+      backgroundColor: 'white',
+      marginHorizontal: 25,
+    },
   });
