@@ -7,6 +7,7 @@ import HomeScreen from './src/screens/Home.js';
 import EventScreen from './src/screens/EventPage.js';
 import GuestScreen from './src/screens/GuestList.js';
 import MapScreen from './src/screens/MapPage.js';
+//import Guest from './src/screens/ListViewDemo7.js';
 
 const RootStack = createStackNavigator(
     {
@@ -14,6 +15,7 @@ const RootStack = createStackNavigator(
         Event: EventScreen,
         Guest: GuestScreen,
         Map: MapScreen,
+        //Guest1: Guest,
     },
     {
         initialRouteName: "Home"
