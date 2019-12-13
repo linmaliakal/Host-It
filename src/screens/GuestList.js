@@ -10,12 +10,13 @@ import { withOrientation } from 'react-navigation';
 //import Row from './Row';
 
 export default class Home extends Component {
+  static navigationOptions = {
+    title: 'Guest List'
+  };
+
   render() {
     return (
       <View style={styles.ViewContainer}>
-        <View style={styles.Title}>
-          <Text>Attendees</Text>
-        </View>
         <View>
           <SectionList
             sections={[
@@ -25,7 +26,12 @@ export default class Home extends Component {
               {title: 'D', data: ['Dan', 'Darrell', 'Dominic']},
               {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
             ]}
-            renderItem={({item}) => <Text style={styles.SectionList}>{item}</Text>}
+            renderItem={({item}) =>
+            <View style={{flexDirection: "row"}}>
+              <View style={styles.circle}/>
+              <Text style={styles.SectionList}>{item}</Text>
+            </View>
+            }
             renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
             keyExtractor={(item, index) => index}
           />
@@ -37,8 +43,7 @@ export default class Home extends Component {
 
 const styles = StyleSheet.create(
   {
-    ViewContainer:
-    {
+    ViewContainer: {
       flex: 1,
       paddingTop: 22,
       //fontSize: 16,
@@ -46,19 +51,17 @@ const styles = StyleSheet.create(
       fontSize: 30,
 
     },
-    Title:
-    {
+    Title: {
       justifyContent: 'center',
       alignItems: 'center',
       paddingBottom: 4,
-      fontSize: 30,
-      textDecorationLine: 'underline',
-      textDecorationColor: 'black',
-
-
+      borderBottomColor: 'black',
+      borderBottomWidth: 3
     },
-    SectionList:
-    {
+    TitleText: {
+      fontSize: 30,
+    },
+    SectionList: {
       //flex: 1,
       paddingLeft: 10,
       paddingTop: 5,
@@ -72,5 +75,14 @@ const styles = StyleSheet.create(
       color: 'rgba(255, 255, 255, 1.0)',
       fontWeight: 'bold',
       backgroundColor: 'rgba(181, 209, 237, 1.0)',
+    },
+    circle: {
+      alignSelf: 'center',
+      justifyContent: 'center',
+      height: 20,
+      width: 20,
+      borderRadius: 10,
+      backgroundColor: 'black',
+      marginLeft: 10
     },
   });
