@@ -13,6 +13,7 @@ import {
   loadSettings,
   saveSettings 
   } from '../storage/settingsStorage';
+import TaskList from '../components/TaskList';
 
 export default class EventPage extends Component {
   
@@ -62,6 +63,7 @@ export default class EventPage extends Component {
           </TouchableOpacity>
           </View>
         </ScrollView>
+        <TaskList/>
       </View>
     );
   }
