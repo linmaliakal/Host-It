@@ -62,7 +62,7 @@ export default class Home extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <SectionList
-          sections={this.state.events}
+          sections={DATA}
           keyExtractor={(item, index) => item + index}
           renderItem={({ item }) => <Item title={item.title} />}
           renderSectionHeader={({ section: { category } }) => (

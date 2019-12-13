@@ -213,17 +213,17 @@ const styles = StyleSheet.create(
       flexWrap: 'wrap',
       // flex: 4, 
       padding: 4, 
-      alignItems: 'flex-start', 
+      alignItems: 'flex-start',
       alignContent: 'flex-start'
     },
     viewHolder: {
-      flex: 0.3,
+      //flex: 0.3,
       height: 100,
       backgroundColor: '#9229BA',
-      justifyContent: 'flex-start',
-      alignItems: 'flex-start',
+      //justifyContent: 'flex-start',
+      //alignItems: 'flex-start',
       margin: 4,
-      flexWrap: 'wrap',
+      //flexWrap: 'wrap',
       // flexDirection: 'row', 
     },
     headerText: {
