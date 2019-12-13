@@ -6,61 +6,70 @@ import {
   View,
   SafeAreaView,
   SectionList,
+  FlatList,
+  TouchableHighlight,
 } from 'react-native';
+import { getCards } from '../services/api.js'
 
 const DATA = [
   {
-    title: 'Monday, Nov 25',
-    data: ['Family Reunion'],
+    category: 'October 2019',
+    data: [
+      {id: 0, title: 'Family Reunion'},
+      {id: 1, title: 'Text'},
+    ],
   },
   {
-    title: 'Tuesday, Nov 26',
-    data: ['Retirement Party', 'Team Potluck'],
-  },
-  {
-    title: 'Wednesday, Nov 27',
-    data: [],
-  },
-  {
-    title: 'Thursday, Nov 28 ',
-    data: ['Thanksgiving'],
+    category: 'November 2019',
+    data: [
+      {id: 0, title: 'Retirement Party'},
+      {id: 1, title: 'Team Potluck'},
+      {id: 2, title: 'Thanksgiving'}
+    ],
   },
 ];
 
 function Item({ title }) {
   return (
-    <View style={styles.item}>
-      <Text style={styles.title}>{title}</Text>
-    </View>
+    <TouchableHighlight onPress={() => { this.props.navigation.navigate('Event', {key: 'xyz'}) }}>
+      <View style={styles.item}>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.date}>Wednesday, Oct 28</Text>
+      </View>
+    </TouchableHighlight>
   );
 }
 
 export default class Home extends Component {
+
+  state = { events: [] }
+
+  componentDidMount() {
+    this.unsubscribeGetCards = getCards((snapshot) => {
+      console.log(snapshot);
+      this.setState({
+        events: Object.values(snapshot.val())
+      })
+    })
+    console.log("state: " + JSON.stringify(this.state.events));
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeGetCards();
+  }
+
   render() {
     return (
-<<<<<<< HEAD
-      <View style={styles.ViewContainer}>
-        <Text>Host-It</Text>
-            <TouchableHighlight onPress={() => this.props.navigation.navigate('Event')}>
-              <View style={styles.ButtonBox}>
-                <View>
-                  <Text style={styles.CustomButton}>Go to Events</Text>
-                </View>
-              </View>
-            </TouchableHighlight>
-      </View>
-=======
       <SafeAreaView style={styles.container}>
         <SectionList
-          sections={DATA}
+          sections={this.state.events}
           keyExtractor={(item, index) => item + index}
-          renderItem={({ item }) => <Item title={item} />}
-          renderSectionHeader={({ section: { title } }) => (
-            <Text style={styles.header}>{title}</Text>
+          renderItem={({ item }) => <Item title={item.title} />}
+          renderSectionHeader={({ section: { category } }) => (
+            <Text style={styles.header}>{category}</Text>
           )}
         />
       </SafeAreaView>
->>>>>>> 1ab4ca12193c451513e859c57d729e8ef57841eb
     );
   }
 }
@@ -68,21 +77,24 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //marginTop: Constants.statusBarHeight,
     backgroundColor: '#1a1a1a',
   },
   item: {
     backgroundColor: 'white',
-    padding: 30,
-    marginVertical: 8,
-    marginHorizontal: 20,
+    padding: 20,
+    marginVertical: 6,
+    marginHorizontal: 10,
+    borderRadius: 15,
   },
   header: {
-    fontSize: 20,
+    fontSize: 18,
     textAlign: 'center',
     color: 'white',
   },
   title: {
     fontSize: 24,
+  },
+  date: {
+    fontSize: 20,
   },
 });
