@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     color: 'white',
+    fontFamily: 'SourceSansPro-Bold'
   },
   title: {
     fontSize: 24,
