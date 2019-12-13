@@ -9,7 +9,7 @@ import { initApi } from './src/services/api.js';
 //import screens here
 import HomeScreen from './src/screens/Home.js';
 import EventScreen from './src/screens/EventPage.js';
-import GuestScreen from './src/screens/GuestListPage.js';
+import GuestScreen from './src/screens/GuestList.js';
 import MapScreen from './src/screens/MapPage.js';
 
 import LandingScreen from './src/screens/Landing/Landing.js';
