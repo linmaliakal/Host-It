@@ -4,6 +4,8 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator} from 'react-navigation-stack';
 import { createDrawerNavigator} from 'react-navigation-drawer';
 
+import { initApi } from './src/services/api.js';
+
 //import screens here
 import HomeScreen from './src/screens/Home.js';
 import EventScreen from './src/screens/EventPage.js';
@@ -63,6 +65,10 @@ const PrimaryNav = createStackNavigator({
 const AppContainer = createAppContainer(PrimaryNav);
 
 class Router extends Component {
+    componentWillMount(){
+      initApi();
+    }
+
     render() {
     return (
         <AppContainer />
