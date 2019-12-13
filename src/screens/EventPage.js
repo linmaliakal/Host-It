@@ -9,6 +9,8 @@ import {
   FlatList,
   ScrollView,
   TextInput,
+  Animated,
+  Image,
   TouchableHighlight,
   TouchableOpacity } from 'react-native';
 import { 
@@ -42,7 +44,106 @@ export default class EventPage extends Component {
   //   this.setState(initialState);
   // } 
   
+constructor() {
+    super();
+
+    this.state = { valueArray: [], disabled: false }
+    this.index = 0;
+    this.animatedValue = new Animated.Value(0);
+}
+addMore = () => {
+    this.animatedValue.setValue(0);
+    let newlyAddedValue = { index: this.index }
+    this.setState({ disabled: true, valueArray: [...this.state.valueArray, newlyAddedValue] }, () => {
+      Animated.timing(
+        this.animatedValue,
+        {
+          toValue: 1,
+          duration: 500,
+          useNativeDriver: true
+        }
+      ).start(() => {
+        this.index = this.index + 1;
+        this.setState({ disabled: false });
+      });
+    });
+  }
+buttonPress=()=>{
+    this.setState({viewSection:true})
+}
+
+  //beginning of paste
+
+// render() {
+    // const animationValue = this.animatedValue.interpolate(
+    //   {
+    //     inputRange: [0, 1],
+    //     outputRange: [-59, 0]
+    //   });
+
+    // let newArray = this.state.valueArray.map((item, key) => {
+    //   if ((key) == this.index) {
+    //     return (
+    //       <Animated.View key={key} style={[styles.viewHolder, { opacity: this.animatedValue, transform: [{ translateY: animationValue }] }]}>
+    //         <Text style={styles.headerText}>Row {item.index}</Text>
+    //       </Animated.View>
+    //     );
+    //   }
+    //   else {
+    //     return (
+    //       <View key={key} style={styles.viewHolder}>
+    //         <Text style={styles.headerText}>Row No :- {item.index}</Text>
+    //       </View>
+    //     );
+    //   }
+    // });
+
+//     return (
+    //   <View style={styles.container} >
+    //     <ScrollView>
+    //       <View style={{ flex: 1, padding: 4 }}>
+    //         {
+    //           newArray
+    //         }
+    //       </View>
+    //     </ScrollView>
+
+    //     <TouchableOpacity activeOpacity={0.8} style={styles.buttonDesign} disabled={this.state.disabled} onPress={this.addMore}>
+    //       <Image source={require('./images/addButton.png')} style={styles.buttonImage} />
+    //     </TouchableOpacity>
+    //   </View>
+    // );
+//   }
+
+  //end of paste
+
+
   render() {
+
+    const animationValue = this.animatedValue.interpolate(
+      {
+        inputRange: [0, 1],
+        outputRange: [-59, 0]
+      });
+
+    let newArray = this.state.valueArray.map((item, key) => {
+      if ((key) == this.index) {
+        return (
+          <Animated.View key={key} style={[styles.viewHolder, { opacity: this.animatedValue, transform: [{ translateY: animationValue }] }]}>
+            <Text style={styles.headerText}>To-do {item.index}</Text>
+            <TextInput></TextInput>
+          </Animated.View>
+        );
+      }
+      else {
+        return (
+          <View key={key} style={styles.viewHolder}>
+            <Text style={styles.headerText}>To do : {item.index}</Text>
+            <TextInput>Placeholder</TextInput>
+          </View>
+        );
+      }
+    });
     return (
       <SafeAreaView style={styles.ViewContainer}>
           <View style={styles.informationBox}>  
@@ -67,6 +168,25 @@ export default class EventPage extends Component {
           <SafeAreaView style={styles.scrollView}>
             
           </SafeAreaView>
+    <View style={styles.container} >
+        <ScrollView>
+        
+          <View style={styles.toDoList}>
+        
+            {
+              newArray
+            }
+          </View>
+        </ScrollView>
+
+        <View styles={styles.informationBox}>
+        <TouchableOpacity activeOpacity={0.8} style={styles.buttonDesign} disabled={this.state.disabled} onPress={this.addMore}>
+          {/* <Image source={require('./addButton.png')} style={styles.buttonImage} /> */}
+        <Text>Add to-do</Text>
+        </TouchableOpacity>
+        </View>
+      </View>
+    
       </SafeAreaView>
     );
   }
@@ -83,8 +203,47 @@ const styles = StyleSheet.create(
     },
     container: {
       flex: 1,
-      paddingTop: 45,
+      // paddingTop: 45,
       backgroundColor: '#F5FCFF',
+      flexDirection: 'row',
+    },
+    toDoList: { 
+      justifyContent: 'center',
+      flexDirection: 'row', 
+      flexWrap: 'wrap',
+      // flex: 4, 
+      padding: 4, 
+      alignItems: 'flex-start', 
+      alignContent: 'flex-start'
+    },
+    viewHolder: {
+      flex: 0.3,
+      height: 100,
+      backgroundColor: '#9229BA',
+      justifyContent: 'flex-start',
+      alignItems: 'flex-start',
+      margin: 4,
+      flexWrap: 'wrap',
+      // flexDirection: 'row', 
+    },
+    headerText: {
+      color: 'white',
+      fontSize: 25
+    },
+    buttonDesign: {
+      position: 'absolute',
+      right: 25,
+      bottom: 25,
+      borderRadius: 30,
+      width: 90,
+      height: 90,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'skyblue'
+    },
+    buttonImage: {
+      resizeMode: 'contain',
+      width: '100%',
     },
     titleStyle: {
       fontSize: 30,
